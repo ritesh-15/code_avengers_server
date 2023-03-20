@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Delivered",
+        "Out for delivery",
+        "Cancelled",
+        "Confirmed"
+      ],
+      "default": "Confirmed",
+      "required": false
+    },
+    "restaurant": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::restaurant.restaurant",
+      "inversedBy": "orders"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    },
+    "location": {
+      "type": "text",
+      "required": true
+    },
+    "paymentMode": {
+      "type": "enumeration",
+      "enum": [
+        "Online",
+        "Cash On Delivery"
+      ],
+      "required": true
+    },
+    "isPaymentDone": {
+      "type": "boolean",
+      "default": false
+    },
+    "amount": {
+      "type": "decimal",
+      "required": true
+    }
+  }
+}
